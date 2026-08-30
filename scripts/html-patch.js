@@ -17,10 +17,11 @@ function patchHtmlContent(html) {
     )
     .replace(/<link rel="manifest" href="\/manifest\.webmanifest\/">\s*/gi, "");
 
-  // Broken tags from an old patch: <script "/js/foo.js"> or <a class="x" "/path">
-  out = out.replace(/<script\s+"(\/[^"]+)"><\/script>/gi, '<script src="$1"></script>');
-  out = out.replace(/<a\b([^>]*?)\s+"(\/[^"]+)">/gi, '<a$1 href="$2">');
-  out = out.replace(/<img\b([^>]*?)\s+"(\/[^"]+)"/gi, '<img$1 src="$2"');
+  // Broken tags from an old patch stripped href=/src= leaving quoted paths as fake attributes.
+  // e.g. <a "/index.html#pricing" data-navItem-id="37"> or <a '/index.html#features' >
+  out = out.replace(/<script\s+(['"])(\/?[^'"]+)\1\s*><\/script>/gi, "<script src=$1$2$1></script>");
+  out = out.replace(/<a\b(?![^>]*\bhref=)(\s*)(['"])(\/[^'"]+)\2/gi, "<a href=$2$3$2");
+  out = out.replace(/<img\b(?![^>]*\bsrc=)(\s*)(['"])(\/[^'"]+)\2/gi, "<img src=$2$3$2");
 
   // Normalize site scripts to absolute paths.
   out = out.replace(/<script\s+src="js\//gi, '<script src="/js/');
@@ -37,6 +38,10 @@ function patchHtmlContent(html) {
 
   if (out.indexOf("/js/smart-nav.js") < 0 && /<\/body>/i.test(out)) {
     out = out.replace(/<\/body>/i, '<script src="/js/smart-nav.js" defer></script>\n</body>');
+  }
+
+  if (out.indexOf("/js/nav-fallback.js") < 0 && /<\/body>/i.test(out)) {
+    out = out.replace(/<\/body>/i, '<script src="/js/nav-fallback.js" defer></script>\n</body>');
   }
 
   return out;
