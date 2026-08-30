@@ -1,11 +1,19 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "functions": {
     "api/index.js": {
-      "includeFiles": "../**"
+      "includeFiles": "../{account,admin,checkout,css,js}/**"
     }
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api" }
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/order", "destination": "/api" },
+    { "source": "/order/(.*)", "destination": "/api" },
+    { "source": "/invoice/(.*)", "destination": "/api" },
+    { "source": "/admin", "destination": "/api" },
+    { "source": "/affiliates", "destination": "/api" },
+    { "source": "/settings", "destination": "/api" },
+    { "source": "/clients/(.*)", "destination": "/api" }
   ]
 }
