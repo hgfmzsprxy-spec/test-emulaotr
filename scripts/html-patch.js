@@ -43,8 +43,8 @@ function patchHtmlContent(html) {
 
   // Broken tags from an old patch stripped href=/src= leaving quoted paths as fake attributes.
   out = out.replace(/<script\s+(['"])(\/?[^'"]+)\1\s*><\/script>/gi, "<script src=$1$2$1></script>");
-  out = out.replace(/<a\b(?![^>]*\bhref=)(\s*)(['"])(\/[^'"]+)\2/gi, "<a href=$2$3$2");
-  out = out.replace(/<img\b(?![^>]*\bsrc=)(\s*)(['"])(\/[^'"]+)\2/gi, "<img src=$2$3$2");
+  out = out.replace(/<a\b(?![^>]*\bhref=)([^>]*?)\s+(['"])(\/[^'"]+)\2/gi, "<a$1 href=$2$3$2");
+  out = out.replace(/<img\b(?![^>]*\bsrc=)([^>]*?)\s+(['"])(\/[^'"]+)\2/gi, "<img$1 src=$2$3$2");
 
   if (STRIPPED_NAV_RE.test(out) && !/<nav[^>]*class=['"][^'"]*theme-navbar/i.test(out)) {
     out = out.replace(STRIPPED_NAV_RE, SITE_NAVBAR.trim());
