@@ -460,7 +460,17 @@
     }
     if (name && accessToken) {
       try {
-        await claimDisplayName(name, accessToken);
+        var availRes = await fetch("/api/display-name/available", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: name })
+        });
+        var availJson = await availRes.json().catch(function () {
+          return {};
+        });
+        if (availRes.ok && availJson.available) {
+          await claimDisplayName(name, accessToken);
+        }
       } catch (err) {}
     }
     saveAuthHint(user);

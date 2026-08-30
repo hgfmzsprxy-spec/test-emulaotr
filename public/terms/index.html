@@ -263,11 +263,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="ipsLayout_container">
             
 
-	<nav>
-		<div class='ipsNavBar_primary ipsLayout_container ipsNavBar_noSubBars'>
-			<ul data-role="primaryNavBar" class='ipsResponsive_showDesktop ipsClearfix'>
-				<li>
-					<a href='/index.html' title='Go to the community homepage'><i class='fa fa-angle-left'></i> Community Home</a>
+	<nav data-controller='core.front.core.navBar' class='theme-navbar ipsNavBar_noSubBars ipsResponsive_showDesktop'>
+		<div class='ipsNavBar_primary ipsNavBar_noSubBars'>
+			<ul data-role="primaryNavBar" class='ipsClearfix'>
+		<li id='elNavSecondary_53' data-role="navBarItem" data-navApp="core" data-navExt="Menu">
+				<a href="#" id="elNavigation_53" data-ipsMenu data-ipsMenu-appendTo='#elNavSecondary_53' data-ipsMenu-activeClass='ipsNavActive_menu' data-navItem-id="53">
+					Information <i class="fa-light fa-angle-down"></i>
+				</a>
+				<ul id="elNavigation_53_menu" class="ipsMenu ipsMenu_auto ipsHide">
+			<li class='ipsMenu_item'><a href="/index.html#features">Features</a></li>
+			<li class='ipsMenu_item'><a href="/index.html#why-to-use">Why to use</a></li>
+			<li class='ipsMenu_item'><a href="/index.html#how-it-works">How it Works</a></li>
+				</ul>
+		</li>
+		<li id='elNavSecondary_37' data-role="navBarItem" data-navApp="stsmanager" data-navExt="STSViewMenu">
+				<a href="/index.html#pricing" data-navItem-id="37">Pricing</a>
+		</li>
+		<li id='elNavSecondary_45' data-role="navBarItem" data-navApp="core" data-navExt="Menu">
+				<a href="#" id="elNavigation_45" data-ipsMenu data-ipsMenu-appendTo='#elNavSecondary_45' data-ipsMenu-activeClass='ipsNavActive_menu' data-navItem-id="45">
+					Partners <i class="fa-light fa-angle-down"></i>
+				</a>
+				<ul id="elNavigation_45_menu" class="ipsMenu ipsMenu_auto ipsHide">
+			<li class='ipsMenu_item'><a href="/affiliates/">Affiliates</a></li>
+			<li class='ipsMenu_item'><a href="/content-creators/">Content Creators</a></li>
+			<li class='ipsMenu_item'><a href="/resellers/">Resellers</a></li>
+				</ul>
+		</li>
+		<li id='elNavSecondary_43' data-role="navBarItem" data-navApp="core" data-navExt="Menu">
+				<a href="#" id="elNavigation_43" data-ipsMenu data-ipsMenu-appendTo='#elNavSecondary_43' data-ipsMenu-activeClass='ipsNavActive_menu' data-navItem-id="43">
+					Community <i class="fa-light fa-angle-down"></i>
+				</a>
+				<ul id="elNavigation_43_menu" class="ipsMenu ipsMenu_auto ipsHide">
+			<li class='ipsMenu_item'><a href="/reviews/">Reviews</a></li>
+			<li class='ipsMenu_item'><a href="/configs/">Config</a></li>
+			<li class='ipsMenu_item'><a href="/forums/">Forums</a></li>
+				</ul>
+		</li>
+				<li class='ipsHide' id='elNavigationMore' data-role='navMore'>
+					<a href='#' data-ipsMenu data-ipsMenu-appendTo='#elNavigationMore' id='elNavigationMore_dropdown'>More</a>
+					<ul class='ipsNavBar_secondary ipsHide' data-role='secondaryNavBar'>
+						<li class='ipsHide' id='elNavigationMore_more' data-role='navMore'>
+							<a href='#' data-ipsMenu data-ipsMenu-appendTo='#elNavigationMore_more' id='elNavigationMore_more_dropdown'>More <i class='fa fa-caret-down'></i></a>
+							<ul class='ipsHide ipsMenu ipsMenu_auto' id='elNavigationMore_more_dropdown_menu' data-role='moreDropdown'></ul>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</div>
@@ -492,8 +531,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <nav class="theme-footerLinks_nav home-footer-cat home-footer-cat--community">
                   <ul class="theme-footer_list dataList">
                     <li class="list-title">Community</li>
-                    <li><a href="/reviews/index.html">Reviews</a></li>
-                    <li><a href="/configs/index.html">Config</a></li>
+                    <li><a href="/reviews/">Reviews</a></li>
+                    <li><a href="/configs/">Config</a></li>
                     <li><a href="/forums/">Forums</a></li>
                   </ul>
                 </nav>
@@ -501,8 +540,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <ul class="theme-footer_list dataList">
                     <li class="list-title">Partners</li>
                     <li><a href="/affiliates/">Affiliates</a></li>
-                    <li><a href="/content-creators/index.html">Content Creators</a></li>
-                    <li><a href="/resellers/index.html">Resellers</a></li>
+                    <li><a href="/content-creators/">Content Creators</a></li>
+                    <li><a href="/resellers/">Resellers</a></li>
                   </ul>
                 </nav>
               </div>
@@ -769,13 +808,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			</li>
 
 			<li>
-				<a href='/content-creators/index.html' >
+				<a href='/content-creators/' >
 					Content Creators
 				</a>
 			</li>
 
 			<li>
-				<a href='/resellers/index.html' >
+				<a href='/resellers/' >
 					Resellers
 				</a>
 			</li>
@@ -807,13 +846,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	
 		
 						<li>
-				<a href='/reviews/index.html' >
+				<a href='/reviews/' >
 					Reviews
 				</a>
 			</li>
 
 			<li>
-				<a href='/configs/index.html' >
+				<a href='/configs/' >
 					Configs
 				</a>
 			</li>
@@ -1844,261 +1883,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <script>
-/* Desktop navigation hover preview and click-to-pin */
-(function () {
-  'use strict';
-
-  var OPEN_DELAY = 70;
-  var CLOSE_DELAY = 180;
-  var activeItem = null;
-  var pinnedItem = null;
-
-  function desktopHoverEnabled() {
-    return window.matchMedia(
-      '(min-width: 980px) and (hover: hover)'
-    ).matches;
-  }
-
-  function directChild(item, selector) {
-    var children = item ? item.children : [];
-
-    for (var index = 0; index < children.length; index += 1) {
-      if (children[index].matches(selector)) {
-        return children[index];
-      }
-    }
-
-    return null;
-  }
-
-  function clearTimer(item, property) {
-    if (item && item[property]) {
-      window.clearTimeout(item[property]);
-      item[property] = null;
-    }
-  }
-
-  function closeItem(item, force) {
-    if (!item) {
-      return;
-    }
-
-    if (!force && item === pinnedItem) {
-      return;
-    }
-
-    clearTimer(item, '_ghostNavOpenTimer');
-    clearTimer(item, '_ghostNavCloseTimer');
-
-    item.classList.remove(
-      'ghostNavHoverOpen',
-      'ghostNavPinnedOpen'
-    );
-
-    var trigger = directChild(item, 'a[data-ipsMenu]');
-    var menu = directChild(item, 'ul.ipsMenu');
-
-    if (trigger) {
-      trigger.setAttribute('aria-expanded', 'false');
-    }
-
-    if (menu) {
-      menu.classList.add('ipsHide');
-      menu.setAttribute('aria-hidden', 'true');
-    }
-
-    if (activeItem === item) {
-      activeItem = null;
-    }
-
-    if (pinnedItem === item) {
-      pinnedItem = null;
-    }
-  }
-
-  function openItem(item, pin) {
-    if (!item || !desktopHoverEnabled()) {
-      return;
-    }
-
-    if (!pin && pinnedItem && pinnedItem !== item) {
-      return;
-    }
-
-    if (pin && pinnedItem && pinnedItem !== item) {
-      closeItem(pinnedItem, true);
-    }
-
-    if (activeItem && activeItem !== item) {
-      closeItem(activeItem, true);
-    }
-
-    var trigger = directChild(item, 'a[data-ipsMenu]');
-    var menu = directChild(item, 'ul.ipsMenu');
-
-    if (!trigger || !menu) {
-      return;
-    }
-
-    menu.classList.add('ghostNavHoverMenu');
-    menu.classList.add('ipsHide');
-    menu.setAttribute('aria-hidden', 'false');
-    item.classList.add('ghostNavHoverOpen');
-    trigger.setAttribute('aria-expanded', 'true');
-    activeItem = item;
-
-    if (pin) {
-      item.classList.add('ghostNavPinnedOpen');
-      pinnedItem = item;
-    }
-  }
-
-  function bindItem(item) {
-    if (
-      !item ||
-      item.dataset.ghostNavHoverBound === '1'
-    ) {
-      return;
-    }
-
-    var trigger = directChild(item, 'a[data-ipsMenu]');
-    var menu = directChild(item, 'ul.ipsMenu');
-
-    if (!trigger || !menu) {
-      return;
-    }
-
-    item.dataset.ghostNavHoverBound = '1';
-    menu.classList.add('ghostNavHoverMenu');
-
-    item.addEventListener('mouseenter', function () {
-      if (!desktopHoverEnabled()) {
-        return;
-      }
-
-      clearTimer(item, '_ghostNavCloseTimer');
-
-      item._ghostNavOpenTimer = window.setTimeout(
-        function () {
-          openItem(item, false);
-        },
-        OPEN_DELAY
-      );
-    });
-
-    item.addEventListener('mouseleave', function () {
-      if (!desktopHoverEnabled()) {
-        return;
-      }
-
-      if (item === pinnedItem) {
-        return;
-      }
-
-      clearTimer(item, '_ghostNavOpenTimer');
-
-      item._ghostNavCloseTimer = window.setTimeout(
-        function () {
-          closeItem(item, false);
-        },
-        CLOSE_DELAY
-      );
-    });
-
-    /*
-     * On desktop, clicking a parent pins its dropdown open. Capture the
-     * event before IPS can run its own click toggle and close the hover
-     * preview. Mobile and touch navigation retain native IPS behaviour.
-     */
-    trigger.addEventListener('click', function (event) {
-      if (!desktopHoverEnabled()) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (event.stopImmediatePropagation) {
-        event.stopImmediatePropagation();
-      }
-
-      clearTimer(item, '_ghostNavOpenTimer');
-      clearTimer(item, '_ghostNavCloseTimer');
-      openItem(item, true);
-    }, true);
-  }
-
-  function bindAll() {
-    var items = document.querySelectorAll(
-      '.theme-navbar ' +
-      '.ipsNavBar_primary ' +
-      '> ul[data-role="primaryNavBar"] ' +
-      '> li[data-role="navBarItem"]'
-    );
-
-    Array.prototype.forEach.call(items, bindItem);
-  }
-
-  function closeAllHoverMenus(force) {
-    var openItems = document.querySelectorAll(
-      '.theme-navbar .ghostNavHoverOpen'
-    );
-
-    Array.prototype.forEach.call(openItems, function (item) {
-      closeItem(item, force);
-    });
-  }
-
-  function init() {
-    bindAll();
-
-    var navigation = document.querySelector(
-      '.theme-navbar .ipsNavBar_primary'
-    );
-
-    if (navigation && window.MutationObserver) {
-      new MutationObserver(bindAll).observe(navigation, {
-        childList: true,
-        subtree: true
-      });
-    }
-
-    window.addEventListener('resize', function () {
-      if (!desktopHoverEnabled()) {
-        closeAllHoverMenus(true);
-      }
-    });
-
-    document.addEventListener('pointerdown', function (event) {
-      if (
-        activeItem &&
-        !activeItem.contains(event.target)
-      ) {
-        closeAllHoverMenus(true);
-      }
-    }, true);
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeAllHoverMenus(true);
-      }
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      init,
-      { once: true }
-    );
-  } else {
-    init();
-  }
-})();
-</script>
-
-
-<script>
 /* Keep the closed IPS mobile drawer out of keyboard focus */
 (function () {
   'use strict';
@@ -2275,7 +2059,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/js/auth.js?v=discord-2"></script>
 <script src="/js/ref-track.js"></script>
 <script src="/js/smart-nav.js" defer></script>
-<script src="/js/nav-fallback.js" defer></script>
+<script src="/js/site-nav.js" defer></script>
 </body>
 
 </html>
