@@ -162,10 +162,13 @@ function injectAuthBoot(html) {
   return snippet + html;
 }
 
+const { patchHtmlContent } = require("./scripts/html-patch");
+
 function injectSmartNav(data) {
   const source = Buffer.isBuffer(data) ? data.toString("utf8") : String(data || "");
   let html = source.replace(/<style id="gc-smart-nav-boot">[\s\S]*?<\/script>\s*/i, "");
   html = html.replace(/<script id="gc-smart-nav-inline">[\s\S]*?<\/script>\s*/i, "");
+  html = patchHtmlContent(html);
   html = injectAuthBoot(html);
   if (html.indexOf("/js/ref-track.js") < 0) {
     if (/<\/head>/i.test(html)) {

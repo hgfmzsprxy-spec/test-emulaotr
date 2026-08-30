@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { patchHtmlContent } = require("./html-patch");
 
 const ROOT = path.join(__dirname, "..");
 const PUBLIC = path.join(ROOT, "public");
@@ -26,7 +27,6 @@ const REQUIRED_PATHS = [
 const HTML_DIRS = [
   "account",
   "admin",
-  "affiliates",
   "checkout",
   "configs",
   "content-creators",
@@ -44,18 +44,6 @@ const HTML_DIRS = [
   "terms"
 ];
 
-const SKIP_DIRS = new Set([
-  "api",
-  "scripts",
-  "data",
-  "node_modules",
-  "public",
-  "snippets",
-  "sql",
-  ".git",
-  ".vercel"
-]);
-
 function rimraf(dir) {
   if (!fs.existsSync(dir)) return;
   fs.rmSync(dir, { recursive: true, force: true });
@@ -71,17 +59,6 @@ function aliasName(name) {
     .replace(/\.js@v=[^@]+\.js$/i, ".js")
     .replace(/\.css@v=[^@]+$/i, ".css")
     .replace(/\.js@v=[^@]+$/i, ".js");
-}
-
-function patchHtmlContent(html) {
-  return html
-    .replace(/https:\/\/ghostcheats\.com\//g, "/")
-    .replace(/\/\/ghostcheats\.com\//g, "/")
-    .replace(
-      /<link rel="preload" href="\/applications\/core\/interface\/font\/fontawesome-webfont\.woff2[^"]*"[^>]*>\s*/gi,
-      ""
-    )
-    .replace(/<link rel="manifest" href="\/manifest\.webmanifest\/">\s*/gi, "");
 }
 
 function copyTree(srcDir, destDir) {
@@ -120,43 +97,6 @@ function countFiles(dir) {
   return total;
 }
 
-rimraf(PUBLIC);
-ensureDir(PUBLIC);
-
-STATIC_DIRS.forEach(function (name) {
-  copyTree(path.join(ROOT, name), path.join(PUBLIC, name));
-});
-
-if (fs.existsSync(path.join(ROOT, "index.html"))) {
-  writeHtmlMirror(path.join(ROOT, "index.html"), path.join(PUBLIC, "index.html"));
-}
-
-HTML_DIRS.forEach(function (name) {
-  const srcDir = path.join(ROOT, name);
-  if (!fs.existsSync(srcDir)) return;
-  for (const entry of fs.readdirSync(srcDir)) {
-    if (!entry.endsWith(".html")) continue;
-    writeHtmlMirror(
-      path.join(srcDir, entry),
-      path.join(PUBLIC, name, entry)
-    );
-  }
-});
-
-const missing = REQUIRED_PATHS.filter(function (rel) {
-  return !findExistingAsset(ROOT, rel) && !findExistingAsset(PUBLIC, rel);
-});
-
-if (missing.length) {
-  console.error("Vercel build missing required assets:");
-  missing.forEach(function (rel) {
-    console.error("  -", rel);
-  });
-  process.exit(1);
-}
-
-console.log("Vercel public mirror ready:", countFiles(PUBLIC), "files in public/");
-
 function findExistingAsset(root, relativePath) {
   const rel = String(relativePath || "").replace(/^\/+/, "");
   const direct = path.join(root, rel);
@@ -177,3 +117,43 @@ function findExistingAsset(root, relativePath) {
   });
   return matches.length ? path.join(dir, matches[0]) : null;
 }
+
+rimraf(PUBLIC);
+ensureDir(PUBLIC);
+
+STATIC_DIRS.forEach(function (name) {
+  copyTree(path.join(ROOT, name), path.join(PUBLIC, name));
+});
+
+if (fs.existsSync(path.join(ROOT, "index.html"))) {
+  writeHtmlMirror(path.join(ROOT, "index.html"), path.join(PUBLIC, "index.html"));
+}
+
+HTML_DIRS.forEach(function (name) {
+  const srcDir = path.join(ROOT, name);
+  if (!fs.existsSync(srcDir)) return;
+  for (const entry of fs.readdirSync(srcDir)) {
+    if (!entry.endsWith(".html")) continue;
+    writeHtmlMirror(path.join(srcDir, entry), path.join(PUBLIC, name, entry));
+  }
+});
+
+// /affiliates/ must show the account dashboard with the referral panel, not the old IPS page.
+const accountHtml = path.join(ROOT, "account", "index.html");
+if (fs.existsSync(accountHtml)) {
+  writeHtmlMirror(accountHtml, path.join(PUBLIC, "affiliates", "index.html"));
+}
+
+const missing = REQUIRED_PATHS.filter(function (rel) {
+  return !findExistingAsset(ROOT, rel) && !findExistingAsset(PUBLIC, rel);
+});
+
+if (missing.length) {
+  console.error("Vercel build missing required assets:");
+  missing.forEach(function (rel) {
+    console.error("  -", rel);
+  });
+  process.exit(1);
+}
+
+console.log("Vercel public mirror ready:", countFiles(PUBLIC), "files in public/");
