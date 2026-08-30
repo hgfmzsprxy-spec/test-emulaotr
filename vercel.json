@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{../index.html,../account/**,../admin/**,../affiliates/**,../applications/**,../cdn-cgi/**,../checkout/**,../configs/**,../content-creators/**,../cookies/**,../css/**,../images/**,../js/**,../loader/**,../login/**,../lostpassword/**,../register/**,../resellers/**,../reviews/**,../status/**,../subscriptions/**,../support/**,../supportsys/**,../terms/**,../uploads/**}"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api" }
+  ]
+}

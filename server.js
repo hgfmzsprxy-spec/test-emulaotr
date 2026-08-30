@@ -2316,10 +2316,10 @@ function cookieValue(req, name) {
 }
 
 function originFromReq(req) {
-  if (SITE_URL) return SITE_URL;
-  const host = req.headers["x-forwarded-host"] || req.headers.host || "scriptengine.gg";
+  const host = req.headers["x-forwarded-host"] || req.headers.host;
   const proto = req.headers["x-forwarded-proto"] || "https";
-  return proto + "://" + host;
+  if (host) return proto + "://" + String(host).split(",")[0].trim();
+  return SITE_URL;
 }
 
 function looksLikeEmail(value) {
@@ -3159,7 +3159,10 @@ function serveStatic(req, res) {
     return;
   }
 
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+  const urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
+  if (urlPath === "/" || urlPath === "") {
+    filePath = path.join(ROOT, "index.html");
+  } else if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
     filePath = path.join(filePath, "index.html");
   }
 
@@ -3608,17 +3611,21 @@ const server = http.createServer(async function (req, res) {
   serveStatic(req, res);
 });
 
-server.on("error", function (err) {
-  if (err && err.code === "EADDRINUSE") {
-    console.error("Port " + PORT + " is already in use.");
-    console.error("The site is already running at " + SITE_URL + " (port " + PORT + ")");
-    console.error("Close the other terminal running node/server.js, then start again.");
-    process.exit(1);
-  }
-  throw err;
-});
+module.exports = server;
 
-server.listen(PORT, function () {
-  console.log("Script Engine server: " + SITE_URL + " (listening on port " + PORT + ")");
-  console.log("Open " + SITE_URL + " in the browser. file:// will block login/register.");
-});
+if (!process.env.VERCEL) {
+  server.on("error", function (err) {
+    if (err && err.code === "EADDRINUSE") {
+      console.error("Port " + PORT + " is already in use.");
+      console.error("The site is already running at " + SITE_URL + " (port " + PORT + ")");
+      console.error("Close the other terminal running node/server.js, then start again.");
+      process.exit(1);
+    }
+    throw err;
+  });
+
+  server.listen(PORT, function () {
+    console.log("Script Engine server: " + SITE_URL + " (listening on port " + PORT + ")");
+    console.log("Open " + SITE_URL + " in the browser. file:// will block login/register.");
+  });
+}
