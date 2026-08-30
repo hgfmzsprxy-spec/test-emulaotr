@@ -15,6 +15,14 @@ const STATIC_DIRS = [
   "cdn-cgi"
 ];
 
+const REQUIRED_PATHS = [
+  "uploads/javascript_global/root_library.js",
+  "uploads/css_built_18/90eb5adf50a8c640f633d47fd7eb1778_core.css",
+  "applications/mobiledrawer/interface/mobileDrawer.css",
+  "css/site-theme.css",
+  "js/auth.js"
+];
+
 const HTML_DIRS = [
   "account",
   "admin",
@@ -135,4 +143,37 @@ HTML_DIRS.forEach(function (name) {
   }
 });
 
+const missing = REQUIRED_PATHS.filter(function (rel) {
+  return !findExistingAsset(ROOT, rel) && !findExistingAsset(PUBLIC, rel);
+});
+
+if (missing.length) {
+  console.error("Vercel build missing required assets:");
+  missing.forEach(function (rel) {
+    console.error("  -", rel);
+  });
+  process.exit(1);
+}
+
 console.log("Vercel public mirror ready:", countFiles(PUBLIC), "files in public/");
+
+function findExistingAsset(root, relativePath) {
+  const rel = String(relativePath || "").replace(/^\/+/, "");
+  const direct = path.join(root, rel);
+  if (fs.existsSync(direct)) return direct;
+
+  const fileName = path.basename(rel);
+  const parentRel = path.dirname(rel);
+  const alias = aliasName(fileName);
+  if (alias !== fileName) {
+    const aliasPath = path.join(root, parentRel, alias);
+    if (fs.existsSync(aliasPath)) return aliasPath;
+  }
+
+  const dir = path.join(root, parentRel);
+  if (!fs.existsSync(dir)) return null;
+  const matches = fs.readdirSync(dir).filter(function (name) {
+    return name === fileName || name.indexOf(fileName + "@v=") === 0;
+  });
+  return matches.length ? path.join(dir, matches[0]) : null;
+}

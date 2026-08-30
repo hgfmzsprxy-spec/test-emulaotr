@@ -3,20 +3,17 @@
   "buildCommand": "node scripts/prepare-vercel.js",
   "cleanUrls": true,
   "functions": {
-    "api/index.js": {
-      "includeFiles": "../**"
+    "api/**/*.js": {
+      "includeFiles": "{server.js,affiliates-api.js,checkout/**,css/**,js/**,data/**}"
     }
   },
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "src": "/order", "dest": "/api/index.js" },
-    { "src": "/order/(.*)", "dest": "/api/index.js" },
-    { "src": "/invoice/(.*)", "dest": "/api/index.js" },
-    { "src": "/admin", "dest": "/api/index.js" },
-    { "src": "/affiliates", "dest": "/api/index.js" },
-    { "src": "/settings", "dest": "/api/index.js" },
-    { "src": "/clients/(.*)", "dest": "/api/index.js" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/api/index.js" }
+  "rewrites": [
+    { "source": "/order", "destination": "/api/handler" },
+    { "source": "/order/:id", "destination": "/api/handler" },
+    { "source": "/invoice/:id", "destination": "/api/handler" },
+    { "source": "/admin", "destination": "/api/handler" },
+    { "source": "/affiliates", "destination": "/api/handler" },
+    { "source": "/settings", "destination": "/api/handler" },
+    { "source": "/clients/:path*", "destination": "/api/handler" }
   ]
 }

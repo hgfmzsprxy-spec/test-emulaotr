@@ -45,9 +45,8 @@ function findExistingFile(relativePath) {
   for (let i = 0; i < roots.length; i++) {
     const dir = path.normalize(path.join(roots[i], parentRel));
     if (!dir.startsWith(path.resolve(roots[i])) || !fs.existsSync(dir)) continue;
-    const prefix = fileName.split(".")[0];
     const matches = fs.readdirSync(dir).filter(function (name) {
-      return name === fileName || name.indexOf(prefix + "@v=") === 0;
+      return name === fileName || name.indexOf(fileName + "@v=") === 0;
     });
     if (matches.length) return path.join(dir, matches[0]);
   }
@@ -3615,6 +3614,21 @@ const server = http.createServer(async function (req, res) {
         return;
       }
       await handleGetCheckoutSession(req, res, url);
+      return;
+    }
+    if (pathname === "/api/order/create") {
+      if (req.method !== "GET") {
+        sendJson(res, 405, { error: "Use GET for /api/order/create." });
+        return;
+      }
+      const plan = url.searchParams.get("plan") || "";
+      const id = createOrder(plan);
+      if (!id) {
+        sendJson(res, 400, { error: "Invalid plan or Stripe prices are not configured." });
+        return;
+      }
+      res.writeHead(302, { Location: "/order/" + id });
+      res.end();
       return;
     }
     if (pathname.indexOf("/api/") === 0) {
