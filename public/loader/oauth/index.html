@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Script Engine</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #0e0e10;
+      color: #ececec;
+      font-family: Segoe UI, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    p { opacity: .85; }
+  </style>
+  <script>
+    (function () {
+      try {
+        sessionStorage.setItem("se_loader_oauth", String(Date.now()));
+      } catch (e) {}
+      var next = "";
+      try {
+        next = new URLSearchParams(location.search).get("next") || "";
+      } catch (e) {}
+      if (!next) {
+        document.write("<p>Could not start sign in.</p>");
+        return;
+      }
+      location.replace(next);
+    })();
+  </script>
+</head>
+<body>
+  <p>Opening sign in…</p>
+</body>
+</html>

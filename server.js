@@ -5,6 +5,64 @@ const crypto = require("crypto");
 
 const ROOT = __dirname;
 
+function staticRoots() {
+  const roots = [ROOT, path.join(ROOT, "public")];
+  if (process.env.VERCEL) {
+    roots.push(path.join(ROOT, ".."));
+    roots.push(path.join(ROOT, "..", "public"));
+  }
+  const seen = new Set();
+  return roots.filter(function (dir) {
+    const key = path.resolve(dir);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function findExistingFile(relativePath) {
+  const rel = String(relativePath || "").replace(/^\/+/, "");
+  if (!rel) return null;
+
+  const roots = staticRoots();
+  for (let i = 0; i < roots.length; i++) {
+    const candidate = path.normalize(path.join(roots[i], rel));
+    if (!candidate.startsWith(path.resolve(roots[i]))) continue;
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate;
+  }
+
+  const fileName = path.basename(rel);
+  const parentRel = path.dirname(rel);
+  const alias = aliasName(fileName);
+  if (alias !== fileName) {
+  for (let i = 0; i < roots.length; i++) {
+      const aliasPath = path.normalize(path.join(roots[i], parentRel, alias));
+      if (!aliasPath.startsWith(path.resolve(roots[i]))) continue;
+      if (fs.existsSync(aliasPath) && fs.statSync(aliasPath).isFile()) return aliasPath;
+    }
+  }
+
+  for (let i = 0; i < roots.length; i++) {
+    const dir = path.normalize(path.join(roots[i], parentRel));
+    if (!dir.startsWith(path.resolve(roots[i])) || !fs.existsSync(dir)) continue;
+    const prefix = fileName.split(".")[0];
+    const matches = fs.readdirSync(dir).filter(function (name) {
+      return name === fileName || name.indexOf(prefix + "@v=") === 0;
+    });
+    if (matches.length) return path.join(dir, matches[0]);
+  }
+
+  return null;
+}
+
+function aliasName(name) {
+  return String(name || "")
+    .replace(/\.css@v=[^@]+\.css$/i, ".css")
+    .replace(/\.js@v=[^@]+\.js$/i, ".js")
+    .replace(/\.css@v=[^@]+$/i, ".css")
+    .replace(/\.js@v=[^@]+$/i, ".js");
+}
+
 function loadEnv() {
   const envPath = path.join(ROOT, ".env");
   if (!fs.existsSync(envPath)) return;
@@ -2284,9 +2342,16 @@ function serveCheckoutPage(req, res) {
 function safeJoin(urlPath) {
   const decoded = decodeURIComponent((urlPath || "/").split("?")[0]);
   const relative = decoded.replace(/^\/+/, "");
-  const resolved = path.normalize(path.join(ROOT, relative));
-  if (!resolved.startsWith(ROOT)) return null;
-  return resolved;
+  if (!relative) return path.join(ROOT, "index.html");
+  const resolved = findExistingFile(relative);
+  if (!resolved) return null;
+  const roots = staticRoots().map(function (dir) {
+    return path.resolve(dir);
+  });
+  for (let i = 0; i < roots.length; i++) {
+    if (resolved.startsWith(roots[i])) return resolved;
+  }
+  return null;
 }
 
 function send(res, status, body, type) {
@@ -3153,16 +3218,17 @@ function serveStatic(req, res) {
     return;
   }
 
+  const urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
   let filePath = safeJoin(req.url);
+  if (!filePath && (urlPath === "/" || urlPath === "")) {
+    filePath = findExistingFile("index.html");
+  }
   if (!filePath) {
-    send(res, 400, "Bad request");
+    send(res, 404, "Not found");
     return;
   }
 
-  const urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
-  if (urlPath === "/" || urlPath === "") {
-    filePath = path.join(ROOT, "index.html");
-  } else if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
     filePath = path.join(filePath, "index.html");
   }
 

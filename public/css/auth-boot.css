@@ -1,0 +1,195 @@
+html.gc-signed-in #elSignInLink,
+html.gc-signed-in #elUserNav > li:has(#elRegisterButton),
+html.gc-signed-in #elRegisterButton,
+html.gc-signed-in #elSigninButton_mobile,
+html.gc-signed-in #elRegisterButton_mobile,
+html.gc-signed-in #elMobileDrawer .ipsPadding.ipsBorder_bottom:has(#elSigninButton_mobile) {
+  display: none !important;
+}
+
+.gc-user-nav {
+  display: inline-flex !important;
+  align-items: center;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 4px;
+}
+
+#elUserNav,
+#elUserNav > li,
+#gc-user-nav {
+  overflow: visible !important;
+}
+
+.gc-user-trigger-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.gc-user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.gc-user-avatar {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  overflow: hidden;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+  background: #2a2a32;
+}
+
+.gc-user-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gc-user-trigger {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+}
+
+.gc-user-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gc-user-trigger i {
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  transition: color 0.12s ease;
+}
+
+.theme-main--header,
+.theme-header,
+.theme-navbar,
+#ipsLayout_header,
+#elUserLink {
+  overflow: visible !important;
+}
+
+.gc-user-nav.ghostNavHoverOpen .gc-user-trigger i {
+  color: rgb(var(--theme-brand_primary));
+}
+
+.gc-user-nav .gc-user-menu.ghostNavHoverMenu.ipsHide {
+  display: block !important;
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 50% !important;
+  right: auto !important;
+  z-index: 10000 !important;
+  margin: 0 !important;
+  min-width: 180px;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(6px);
+  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0s linear 0.12s;
+}
+
+.gc-user-nav.ghostNavHoverOpen .gc-user-menu.ghostNavHoverMenu {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0);
+  transition-delay: 0s;
+}
+
+.gc-user-nav .gc-user-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 12px;
+}
+
+.gc-user-nav .gc-user-menu.ipsMenu,
+.gc-user-nav .gc-user-menu .ipsMenu_item {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+
+.gc-user-nav .gc-user-menu .ipsMenu_item > a,
+.gc-user-nav .gc-user-menu .ipsMenu_item > button {
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+.gc-user-nav .ipsMenu_item > button {
+  width: 100%;
+  text-align: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#gc-mobile-user {
+  padding: 12px 16px;
+}
+
+#gc-mobile-user .gc-mobile-user-links {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+#gc-mobile-user .gc-mobile-user-links a,
+#gc-mobile-user .gc-mobile-user-links button {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  color: #fff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}

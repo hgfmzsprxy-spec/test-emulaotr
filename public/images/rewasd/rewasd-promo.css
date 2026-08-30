@@ -1,0 +1,235 @@
+.rewasd-promo{
+  --rw-yellow:#ffe795;
+  --rw-yellow-hover:#ffeba5;
+  --rw-bg:rgb(var(--theme-page_background));
+  --rw-badge-bg:#343434;
+  --rw-blur:#22232380;
+  --rw-text:#fff;
+  background:rgb(var(--theme-page_background));
+  color:#fff;
+  font-family:sans-serif;
+  font-size:1rem;
+  font-weight:400;
+  line-height:1.5;
+  width:100%;
+  overflow:visible;
+  padding:1.5rem .75rem;
+  box-sizing:border-box;
+}
+@media(min-width:768px){
+  .rewasd-promo{padding:3.5rem 0}
+}
+.rewasd-promo *,.rewasd-promo *::before,.rewasd-promo *::after{box-sizing:border-box}
+.rewasd-promo a{color:inherit}
+.rewasd-promo p{
+  margin:0 0 1.75rem;
+  text-align:left;
+  color:#fff;
+  font-size:1.1rem;
+  line-height:1.55;
+}
+.rewasd-promo h1{margin:0 0 .5rem;font-weight:600;line-height:1.2}
+.rewasd-promo .rw-container{
+  width:100%;
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 20px;
+}
+.rewasd-promo .rw-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  position:relative;
+  z-index:4;
+}
+.rewasd-promo .rw-row:after{content:none}
+.rewasd-promo .rw-col-text{
+  width:100%;
+  padding-top:1.5rem;
+  text-align:left;
+}
+.rewasd-promo .rw-col-media{display:block;width:100%;margin-top:1.5rem}
+@media(min-width:992px){
+  .rewasd-promo .rw-col-text{width:41.6667%;flex:0 0 41.6667%;max-width:41.6667%;padding-right:1.5rem}
+  .rewasd-promo .rw-col-media{width:58.3333%;flex:0 0 58.3333%;max-width:58.3333%;margin-left:auto;margin-top:0}
+}
+.rewasd-promo .js-swiper--rewasd{width:100%;overflow:visible}
+.rewasd-promo .rw-slide-title{
+  margin:0 0 1.25rem;
+  color:#fff;
+  font-size:clamp(1.7rem, 3vw, 2.35rem);
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:-0.02em;
+}
+.rewasd-promo .js-swiper--rewasd-pagination{
+  position:relative;
+  bottom:auto;
+  top:auto;
+  left:auto;
+  margin:1.5rem 0 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+.rewasd-promo .js-swiper--rewasd-pagination .swiper-pagination-bullet{
+  width:10px;
+  height:10px;
+  margin:0;
+  background:#fff;
+  opacity:0.28;
+  border-radius:50%;
+  transition:opacity .2s ease, transform .2s ease, background-color .2s ease;
+}
+.rewasd-promo .js-swiper--rewasd-pagination .swiper-pagination-bullet-active{
+  opacity:1;
+  background:#ff4438;
+  transform:scale(1.15);
+}
+.rewasd-promo .logo-rewasd{
+  max-width:440px;
+  width:100%;
+  height:auto;
+  display:block;
+  margin:0 0 1.75rem;
+}
+@media(min-width:768px){
+  .rewasd-promo .logo-rewasd{margin-bottom:3rem}
+}
+.rewasd-promo .rw-media-img{
+  width:100%;
+  max-width:800px;
+  height:auto;
+  aspect-ratio:800 / 600;
+  object-fit:contain;
+  object-position:center center;
+  display:block;
+  mix-blend-mode:lighten;
+}
+@media(min-width:992px){
+  .rewasd-promo .rw-col-media.is-keyboard-slide{
+    padding-left:2.75rem;
+  }
+  .rewasd-promo .rw-media-img.is-keyboard{
+    width:114%;
+    max-width:none;
+  }
+}
+.rewasd-promo .gamepad-labels{
+  max-width:28rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  margin:0 0 1.75rem;
+}
+@media(min-width:768px){
+  .rewasd-promo .gamepad-labels{margin-bottom:3rem}
+}
+.rewasd-promo .gamepad-labels .badge{
+  background-color:#343434;
+  padding:.55rem 1.3rem;
+  font-size:.8rem;
+  font-weight:400;
+  border-radius:1px;
+  text-decoration:none;
+  display:inline-block;
+  line-height:1.2;
+}
+.rewasd-promo .gamepad-labels .badge:nth-child(1){color:#eeb430}
+.rewasd-promo .gamepad-labels .badge:nth-child(1):hover{background-color:#eeb43033}
+.rewasd-promo .gamepad-labels .badge:nth-child(2){color:#8595de}
+.rewasd-promo .gamepad-labels .badge:nth-child(2):hover{background-color:#8595de33}
+.rewasd-promo .gamepad-labels .badge:nth-child(3){color:#3d7be7}
+.rewasd-promo .gamepad-labels .badge:nth-child(3):hover{background-color:#3d7be733}
+.rewasd-promo .gamepad-labels .badge:nth-child(4){color:#926ad8}
+.rewasd-promo .gamepad-labels .badge:nth-child(4):hover{background-color:#926ad833}
+.rewasd-promo .gamepad-labels .badge:nth-child(5){color:#b452ba}
+.rewasd-promo .gamepad-labels .badge:nth-child(5):hover{background-color:#b452ba33}
+.rewasd-promo .gamepad-labels .badge:nth-child(6){color:#f6823b}
+.rewasd-promo .gamepad-labels .badge:nth-child(6):hover{background-color:#f6823b33}
+.rewasd-promo .gamepad-labels .badge:nth-child(7){color:#efb400}
+.rewasd-promo .gamepad-labels .badge:nth-child(7):hover{background-color:#efb40033}
+.rewasd-promo .gamepad-labels .badge:nth-child(8){color:#cf4647}
+.rewasd-promo .gamepad-labels .badge:nth-child(8):hover{background-color:#cf464733}
+.rewasd-promo .gamepad-labels .badge:nth-child(9){color:#14b1a1}
+.rewasd-promo .gamepad-labels .badge:nth-child(9):hover{background-color:#14b1a133}
+.rewasd-promo .gamepad-labels .badge:nth-child(10){color:#14bedd}
+.rewasd-promo .gamepad-labels .badge:nth-child(10):hover{background-color:#14bedd33}
+.rewasd-promo .gamepad-labels .badge:nth-child(11){color:#2da358}
+.rewasd-promo .gamepad-labels .badge:nth-child(11):hover{background-color:#2da35833}
+.rewasd-promo .gamepad-labels .badge:nth-child(12){color:#5d72df}
+.rewasd-promo .gamepad-labels .badge:nth-child(12):hover{background-color:#5d72df33}
+.rewasd-promo .rw-actions{
+  display:grid;
+  gap:1rem;
+  margin-bottom:0;
+}
+@media(min-width:768px){
+  .rewasd-promo .rw-actions{
+    display:inline-flex;
+    align-items:flex-start;
+    gap:1rem;
+    margin-bottom:3rem;
+  }
+  .rewasd-promo .rw-actions-desktop{display:block}
+}
+.rewasd-promo .rw-actions-desktop{display:none}
+@media(min-width:768px){
+  .rewasd-promo .rw-actions-desktop{display:block}
+}
+.rewasd-promo .btn{
+  display:inline-block;
+  padding:.65rem 1.35rem;
+  font-size:.9rem;
+  font-weight:600;
+  line-height:normal;
+  text-align:center;
+  text-decoration:none;
+  vertical-align:middle;
+  cursor:pointer;
+  border:1px solid transparent;
+  border-radius:.063rem;
+  transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+.rewasd-promo .btn-lg{
+  padding:1.05rem 2.1rem;
+  font-size:1.15rem;
+  border-radius:.063rem;
+}
+.rewasd-promo .btn-default{
+  color:#fff;
+  background:#ff4438;
+  border-color:#ff4438;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.rewasd-promo .btn-default:hover{
+  color:#fff;
+  background:#e53a30;
+  border-color:#e53a30;
+}
+.rewasd-promo .btn-outline-primary{
+  color:#ff4438;
+  background:transparent;
+  border-color:#ff4438;
+  text-transform:uppercase;
+  white-space:nowrap;
+  display:grid;
+}
+.rewasd-promo .btn-outline-primary:hover{
+  color:#fff;
+  background:#ff4438;
+  border-color:#ff4438;
+}
+.rewasd-promo .btn-link{
+  color:#ff7168;
+  background:transparent;
+  border-color:transparent;
+  font-weight:400;
+  text-decoration:underline;
+  text-transform:none;
+  padding:.5rem 0;
+  display:block;
+}
+.rewasd-promo .btn-link:hover{color:#ff4438}

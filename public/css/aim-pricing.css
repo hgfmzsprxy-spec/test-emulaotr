@@ -1,0 +1,548 @@
+/* Pricing block — styles from https://aimassist.ai/ (scoped to #pricing) */
+
+.aim-pricing {
+  --accent: #ff4438;
+  --accent-ink: #ffffff;
+  --ink: #ffffff;
+  --ink-2: #c0c0c4;
+  --ink-3: #8a8a90;
+  --font: "Roboto", sans-serif;
+  --display: "Rajdhani", "Roboto", sans-serif;
+  --mono: "Roboto", sans-serif;
+  --bg: #0e0e10;
+  position: relative;
+  max-width: 1280px;
+  margin: clamp(64px, 14vw, 180px) auto 0;
+  padding: 64px 64px 32px;
+  scroll-margin-top: 110px;
+  text-align: center;
+  overflow: visible;
+  isolation: isolate;
+  box-sizing: border-box;
+}
+
+.aim-pricing *,
+.aim-pricing *::before,
+.aim-pricing *::after {
+  box-sizing: border-box;
+}
+
+.aim-pricing::before,
+.aim-pricing::after {
+  content: "";
+  position: absolute;
+  background-color: transparent;
+  background-image: radial-gradient(rgb(var(--theme-brand_primary)) 1px, transparent 0);
+  background-position: 50% 50%;
+  background-size: 20px 20px;
+  width: 1000px;
+  height: 750px;
+  z-index: -1;
+  opacity: 0.15;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0) 100%);
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0) 80%);
+}
+
+.aim-pricing::before {
+  left: -210px;
+  bottom: -250px;
+}
+
+.aim-pricing::after {
+  right: -210px;
+  top: -250px;
+}
+
+.aim-pricing .aim-section-head {
+  text-align: center;
+}
+
+.aim-pricing .aim-h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: -2px;
+  color: #fff;
+  margin: 18px 0 0;
+  text-wrap: balance;
+}
+
+.aim-pricing .aim-section-lead {
+  margin-top: 18px;
+  max-width: 620px;
+  margin-inline: auto;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: balance;
+}
+
+.aim-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+  margin-top: 56px;
+  align-items: stretch;
+  padding: 24px 0 8px;
+  text-align: left;
+}
+
+.aim-pricing-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: aim-pricing-rise 0.6s cubic-bezier(.16, 1, .3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+.aim-pricing-cell.best {
+  z-index: 1;
+}
+
+.aim-pricing-card {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0) 48%),
+    linear-gradient(180deg, rgb(22, 23, 28), rgb(17, 18, 22));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 32px 30px 30px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -30px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    transform 280ms cubic-bezier(.16, 1, .3, 1),
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+  will-change: transform, box-shadow;
+}
+
+.aim-pricing-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    520px circle at var(--mx) var(--my),
+    rgba(255, 68, 56, 0.08),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aim-pricing-card::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 68, 56, 0.45) 0%,
+    rgba(255, 68, 56, 0.18) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .aim-pricing-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 68, 56, 0.28);
+    box-shadow:
+      0 40px 80px -30px rgba(0, 0, 0, 0.8),
+      0 0 0 1px rgba(255, 68, 56, 0.08) inset,
+      inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  }
+  .aim-pricing-card:hover::before {
+    opacity: 1;
+  }
+}
+
+.aim-pricing-card-best {
+  transform: translateY(-6px) scale(1.04);
+  transform-origin: top center;
+  border-color: rgba(255, 68, 56, 0.32);
+  animation: none;
+  box-shadow:
+    0 30px 60px -30px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 68, 56, 0.12) inset,
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+@media (hover: hover) {
+  .aim-pricing-card-best:hover {
+    transform: translateY(-10px) scale(1.04);
+  }
+}
+
+.aim-pricing-best-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background: #ff4438;
+  color: var(--accent-ink);
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  border-radius: 99px;
+  box-shadow: none;
+  white-space: nowrap;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.aim-pricing-best-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 99px;
+  background: #fff;
+  animation: aim-pricing-badge-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes aim-pricing-badge-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.aim-pricing-hud {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 11px 6px 9px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  align-self: flex-start;
+}
+
+.aim-pricing-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--accent);
+  box-shadow: none;
+  flex-shrink: 0;
+}
+
+@keyframes aim-pricing-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.aim-pricing-price-block {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.aim-pricing-price {
+  font-family: var(--display);
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+}
+
+.aim-pricing-per {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aim-pricing-meta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.aim-pricing-was {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  text-decoration: line-through;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.aim-pricing-save {
+  padding: 3px 9px;
+  background: rgba(255, 68, 56, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(255, 68, 56, 0.28);
+  border-radius: 99px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.aim-pricing-anchor {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+.aim-pricing-features {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: grid;
+  gap: 10px;
+  flex: 1;
+}
+
+.aim-pricing-feature {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.aim-pricing-feature svg {
+  flex-shrink: 0;
+}
+
+.aim-pricing-cta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 26px;
+  width: 100%;
+  padding: 15px 18px;
+  background: rgba(255, 255, 255, 0.025);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+  box-sizing: border-box;
+  transition:
+    background 220ms ease,
+    border-color 220ms ease;
+}
+
+.aim-pricing-cta.accent {
+  background: #ff4438;
+  color: #fff;
+  border-color: #ff4438;
+  box-shadow: none;
+}
+
+.aim-pricing-cta-arr {
+  display: none;
+}
+
+@media (hover: hover) {
+  .aim-pricing-cta:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 68, 56, 0.35);
+    color: #fff;
+  }
+  .aim-pricing-cta.accent:hover {
+    background: #e53a30;
+    border-color: #e53a30;
+    color: #fff;
+    box-shadow: none;
+  }
+}
+
+.aim-pricing-cell:not(.best) .aim-pricing-best-badge {
+  display: none !important;
+}
+
+.aim-pricing-cell.best .aim-pricing-best-badge {
+  display: inline-flex;
+}
+
+.aim-pricing-cta.is-current,
+.aim-pricing-cta.is-current.accent,
+.aim-pricing-cta.is-current:hover,
+.aim-pricing-cta.is-current.accent:hover {
+  pointer-events: none;
+  cursor: default;
+  background: #ff4438;
+  color: #fff;
+  border-color: #ff4438;
+  box-shadow: none;
+}
+
+.aim-pricing-cta.is-switch {
+  text-decoration: none;
+}
+
+.aim-pricing-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@keyframes aim-pricing-rise {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.aim-pricing-trust {
+  display: none;
+}
+
+.aim-pricing-trust-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  flex-shrink: 0;
+  animation: aim-pricing-pulse 2s ease-in-out infinite;
+}
+
+.aim-pricing-trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aim-pricing-trust-icon {
+  display: inline-flex;
+  color: var(--accent);
+}
+
+.aim-pricing-trust-sep {
+  color: var(--ink-3);
+  opacity: 0.6;
+}
+
+@media (max-width: 1023px) {
+  .aim-pricing {
+    padding: 48px 32px 24px;
+  }
+  .aim-pricing .aim-h2 {
+    font-size: 44px !important;
+  }
+  .aim-pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 12px 0;
+  }
+  .aim-pricing-card-best,
+  .aim-pricing-card-best:hover {
+    transform: none;
+  }
+  .aim-pricing-price {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .aim-pricing {
+    padding: 40px 16px 16px;
+  }
+  .aim-pricing .aim-h2 {
+    font-size: clamp(26px, 7vw, 32px) !important;
+    line-height: 1.08 !important;
+  }
+  .aim-pricing-card {
+    padding: 28px 24px 26px;
+  }
+  .aim-pricing-price {
+    font-size: 48px;
+  }
+  .aim-pricing-trust {
+    gap: 10px;
+    padding: 10px 12px;
+    font-size: 10.5px;
+  }
+  .aim-pricing-trust-sep {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .aim-pricing-card {
+    padding: 24px 18px 22px;
+  }
+  .aim-pricing-price {
+    font-size: 42px;
+  }
+  .aim-pricing-features {
+    gap: 8px;
+    padding-top: 18px;
+    margin-top: 18px;
+  }
+  .aim-pricing-cta {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aim-pricing-cell,
+  .aim-pricing-card,
+  .aim-pricing-card-best,
+  .aim-pricing-pulse,
+  .aim-pricing-best-badge-dot,
+  .aim-pricing-trust-dot,
+  .aim-pricing-cta-arr {
+    animation: none !important;
+    transition: none !important;
+  }
+  .aim-pricing-card-best {
+    transform: none;
+  }
+}

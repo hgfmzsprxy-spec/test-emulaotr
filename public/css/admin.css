@@ -1,0 +1,346 @@
+:root {
+  --bg: #0e0e10;
+  --card: #151518;
+  --line: rgba(255, 255, 255, 0.1);
+  --ink: #f2f2f4;
+  --muted: #9a9aa3;
+  --red: #ff4438;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.gc-admin {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+.gc-admin:has(#gcAdminLogin:not([hidden])) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: none;
+  padding: 24px;
+}
+
+.gc-admin-kicker {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  letter-spacing: -0.03em;
+}
+
+.gc-admin-card,
+.gc-admin-wrap {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--card);
+  padding: 28px;
+}
+
+.gc-admin-card {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gc-admin-card p,
+.gc-admin-wrap p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.gc-admin-discord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  margin-top: 18px;
+  padding: 0 18px;
+  border: 1px solid #ffffff1f;
+  border-radius: 12px;
+  background: #5865f2;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gc-admin-discord:hover,
+.gc-admin-discord:focus-visible {
+  background: #4752c4;
+}
+
+.gc-admin-discord:disabled,
+.gc-admin-discord.is-loading {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.gc-admin-discord-icon {
+  width: 20px;
+  height: 16px;
+  flex: none;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+input, select, button {
+  font: inherit;
+}
+
+input, select {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #101012;
+  color: #fff;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+button {
+  height: 42px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gc-admin-ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: #fff;
+  padding: 0 14px;
+}
+
+.gc-admin-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.gc-admin-table-wrap {
+  overflow: auto;
+}
+
+.gc-admin-table-wrap table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.gc-admin-table-wrap th,
+.gc-admin-table-wrap td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gc-admin-table-wrap th {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gc-admin-table-wrap th:nth-child(1),
+.gc-admin-table-wrap td:nth-child(1) { width: 14%; }
+.gc-admin-table-wrap th:nth-child(2),
+.gc-admin-table-wrap td:nth-child(2) { width: 12%; }
+.gc-admin-table-wrap th:nth-child(3),
+.gc-admin-table-wrap td:nth-child(3) { width: 10%; }
+.gc-admin-table-wrap th:nth-child(4),
+.gc-admin-table-wrap td:nth-child(4) { width: 10%; }
+.gc-admin-table-wrap th:nth-child(5),
+.gc-admin-table-wrap td:nth-child(5) {
+  width: 20%;
+  overflow: visible;
+}
+.gc-admin-table-wrap th:nth-child(6),
+.gc-admin-table-wrap td:nth-child(6) { width: 12%; }
+.gc-admin-table-wrap th:nth-child(7),
+.gc-admin-table-wrap td:nth-child(7) {
+  width: 22%;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.gc-admin-msg {
+  min-height: 1.4em;
+  color: #e11d48;
+}
+
+.gc-admin-msg.is-ok {
+  color: #16a34a;
+}
+
+.gc-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gc-pill-pending {
+  background: rgba(250, 204, 21, 0.12);
+  color: #facc15;
+}
+
+.gc-pill-done {
+  background: rgba(22, 163, 74, 0.12);
+  color: #4ade80;
+}
+
+.gc-dest {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.gc-dest-text {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gc-dest-copy {
+  appearance: none;
+  flex: 0 0 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.gc-dest-copy:hover,
+.gc-dest-copy:focus-visible {
+  background: transparent;
+  color: #fff;
+  outline: none;
+}
+
+.gc-dest-copy.is-copied,
+.gc-dest-copy.is-copied:hover {
+  background: transparent;
+  color: #86efac;
+}
+
+.gc-dest-copy svg {
+  display: block;
+}
+
+.gc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: #101012;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.gc-status-opt {
+  appearance: none;
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.gc-status-opt:hover:not(.is-on) {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gc-status-opt:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 1px;
+}
+
+.gc-status-opt.is-on[data-status="pending"] {
+  background: rgba(250, 204, 21, 0.16);
+  color: #facc15;
+}
+
+.gc-status-opt.is-on[data-status="completed"] {
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+}

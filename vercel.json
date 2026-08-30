@@ -1,19 +1,22 @@
 {
   "version": 2,
+  "buildCommand": "node scripts/prepare-vercel.js",
   "cleanUrls": true,
   "functions": {
     "api/index.js": {
-      "includeFiles": "../{account,admin,checkout,css,js}/**"
+      "includeFiles": "../**"
     }
   },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/order", "destination": "/api" },
-    { "source": "/order/(.*)", "destination": "/api" },
-    { "source": "/invoice/(.*)", "destination": "/api" },
-    { "source": "/admin", "destination": "/api" },
-    { "source": "/affiliates", "destination": "/api" },
-    { "source": "/settings", "destination": "/api" },
-    { "source": "/clients/(.*)", "destination": "/api" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.js" },
+    { "src": "/order", "dest": "/api/index.js" },
+    { "src": "/order/(.*)", "dest": "/api/index.js" },
+    { "src": "/invoice/(.*)", "dest": "/api/index.js" },
+    { "src": "/admin", "dest": "/api/index.js" },
+    { "src": "/affiliates", "dest": "/api/index.js" },
+    { "src": "/settings", "dest": "/api/index.js" },
+    { "src": "/clients/(.*)", "dest": "/api/index.js" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/api/index.js" }
   ]
 }

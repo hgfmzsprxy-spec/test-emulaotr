@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment complete - Script Engine</title>
+  <meta name="robots" content="noindex">
+  <link rel="shortcut icon" href="../images/logo-script-engine-icon.png" type="image/png">
+  <link rel="stylesheet" href="/uploads/css_built_18/341e4a57816af3ba440d891ca87450ff_framework.css?v=fe9cfcab201787412240">
+  <link rel="stylesheet" href="/uploads/css_built_18/258adbb6e4f3e83cd3b355f84e3fa002_custom.css?v=fe9cfcab201787412240">
+  <link rel="stylesheet" href="../css/site-theme.css">
+  <link rel="stylesheet" href="../css/checkout.css">
+</head>
+<body class="ipsApp" style="background:#0e0e10;color:#fff;">
+  <div class="ipsLayout_container">
+    <div class="ipsBox ipsPad gc-checkout-success" id="elCheckoutSuccess">
+      <h1>Confirming payment…</h1>
+      <p id="gcSuccessCopy">Please wait while we confirm your Stripe payment.</p>
+      <a id="gcSuccessLink" href="../index.html">Back to home</a>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var title = document.querySelector('#elCheckoutSuccess h1');
+    var copy = document.getElementById('gcSuccessCopy');
+    var params = new URLSearchParams(window.location.search);
+    var sessionId = params.get('session_id') || '';
+    var paymentIntent = params.get('payment_intent') || '';
+    if (!sessionId && !paymentIntent) {
+      title.textContent = 'Payment not found';
+      copy.textContent = 'No Stripe payment was provided. If you were charged, contact support.';
+      return;
+    }
+    var verify = paymentIntent
+      ? fetch('/api/payment-intent?id=' + encodeURIComponent(paymentIntent))
+      : fetch('/api/checkout-session?session_id=' + encodeURIComponent(sessionId));
+    verify
+      .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
+      .then(function (result) {
+        if (!result.ok || !result.json.paid) {
+          title.textContent = 'Payment incomplete';
+          copy.textContent = result.json.error || 'This payment was not completed. You can return to checkout and try again.';
+          return;
+        }
+        title.textContent = 'Payment received';
+        copy.textContent = 'Thanks. Confirmation will be sent to ' + (result.json.email || 'your email') + '.';
+      })
+      .catch(function () {
+        title.textContent = 'Could not confirm payment';
+        copy.textContent = 'Refresh this page. If you were charged, keep this tab and contact support.';
+      });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Script Engine</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #0e0e10;
+      color: #ececec;
+      font-family: Segoe UI, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    p { opacity: .85; }
+  </style>
+  <script>
+    (function () {
+      var q = (location.search || "").replace(/^\?/, "");
+      var h = (location.hash || "").replace(/^#/, "");
+      var data = q || h;
+      if (q && h) data = q + "&" + h;
+      var target = "http://127.0.0.1:17864/callback";
+      location.replace(data ? (target + "?" + data) : target);
+    })();
+  </script>
+</head>
+<body>
+  <p>Returning to the loader…</p>
+</body>
+</html>
