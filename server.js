@@ -655,6 +655,9 @@ async function handleSaveDisplayName(req, res) {
       return;
     }
     await upsertProfile(user.id, parsed);
+    try {
+      await affiliateApi.ensureAffiliateForUser(user);
+    } catch (err) {}
     sendJson(res, 200, { ok: true, name: parsed.name });
   } catch (err) {
     if (isMissingProfilesTable(err)) {
@@ -3455,6 +3458,23 @@ const server = http.createServer(async function (req, res) {
         return;
       }
       await handleSaveDisplayName(req, res);
+      return;
+    }
+    if (pathname === "/api/affiliates/sync") {
+      if (req.method === "OPTIONS") {
+        res.writeHead(204, {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization"
+        });
+        res.end();
+        return;
+      }
+      if (req.method !== "POST") {
+        sendJson(res, 405, { error: "Use POST for /api/affiliates/sync." });
+        return;
+      }
+      await affiliateApi.handleSyncAffiliate(req, res);
       return;
     }
     if (pathname === "/api/affiliates/me") {

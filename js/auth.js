@@ -71,6 +71,7 @@
       if (!result.error && result.data && result.data.session && result.data.session.access_token) {
         try {
           await claimDisplayName(username, result.data.session.access_token);
+          await syncAffiliateRef(result.data.session.access_token);
         } catch (err) {}
       }
       return result;
@@ -438,6 +439,16 @@
     return false;
   }
 
+  async function syncAffiliateRef(accessToken) {
+    if (!accessToken) return;
+    try {
+      await fetch("/api/affiliates/sync", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + accessToken }
+      });
+    } catch (err) {}
+  }
+
   async function finalizeSocialProfile(user, accessToken) {
     if (!user || !isSocialUser(user)) return user;
     var name = displayNameFromUser(user);
@@ -472,6 +483,9 @@
           await claimDisplayName(name, accessToken);
         }
       } catch (err) {}
+    }
+    if (accessToken) {
+      await syncAffiliateRef(accessToken);
     }
     saveAuthHint(user);
     return user;

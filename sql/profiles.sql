@@ -1,6 +1,6 @@
 -- Unique display names
 -- Paste this in Supabase: SQL Editor → Run
--- Required for registration, Discord/Google OAuth, and Affiliates codes (JANE10).
+-- Required for registration, Discord/Google OAuth, and Affiliates codes (display name slug).
 -- Re-run this whole file after changes. Discord sign-up fails if the old
 -- trigger still raises on missing/taken display names.
 
