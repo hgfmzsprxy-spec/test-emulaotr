@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "vercel-build": "node scripts/prepare-vercel.js"
   }
 }
